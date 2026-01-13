@@ -2,6 +2,8 @@ package jababarium;
 
 import arc.*;
 import arc.util.*;
+import jababarium.content.Artillery;
+import jababarium.content.ModSounds;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
@@ -27,6 +29,8 @@ public class MainJababarium extends Mod{
 
     @Override
     public void loadContent(){
+        Artillery.load();
+        ModSounds.load();
         Log.info("Loading some example content.");
     }
 

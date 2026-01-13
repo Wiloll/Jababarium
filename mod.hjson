@@ -8,7 +8,7 @@ name: "jababarium"
 author: "Mr_Rovenclonchik"
 
 #the fully qualified main class of the mod
-main: "jababarium.JababariumMod"
+main: "jababarium.MainJababarium"
 
 #the mod description as seen in the mod dialog
 description: "A Mindustry greatest mod ever made!"
@@ -17,7 +17,8 @@ description: "A Mindustry greatest mod ever made!"
 version: 1.0
 
 #the minimum game build required to run this mod
-minGameVersion: 154.3
+minGameVersion: 154
+
 
 #this is a java mod
 java: true
