@@ -2,24 +2,28 @@ package jababarium;
 
 import arc.*;
 import arc.util.*;
-import jababarium.content.Artillery;
-import jababarium.content.ModSounds;
+import jababarium.content.JBBlocks;
+import jababarium.content.JBSounds;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
 
-public class MainJababarium extends Mod{
+public class Jababarium extends Mod {
+    public static final String MOD_NAME = "jababarium";
+    public static Mods.LoadedMod MOD;
 
-    public MainJababarium(){
+    public Jababarium() {
+
         Log.info("Loaded ExampleJavaMod constructor.");
 
-        //listen for game load event
+        // listen for game load event
         Events.on(ClientLoadEvent.class, e -> {
-            //show dialog upon startup
+            // show dialog upon startup
             Time.runTask(10f, () -> {
                 BaseDialog dialog = new BaseDialog("frog");
                 dialog.cont.add("behold").row();
-                //mod sprites are prefixed with the mod name (this mod is called 'example-java-mod' in its config)
+                // mod sprites are prefixed with the mod name (this mod is called
+                // 'example-java-mod' in its config)
                 dialog.cont.image(Core.atlas.find("example-java-mod-frog")).pad(20f).row();
                 dialog.cont.button("I see", dialog::hide).size(100f, 50f);
                 dialog.show();
@@ -28,10 +32,14 @@ public class MainJababarium extends Mod{
     }
 
     @Override
-    public void loadContent(){
-        Artillery.load();
-        ModSounds.load();
+    public void loadContent() {
+        JBBlocks.load();
+        JBSounds.load();
         Log.info("Loading some example content.");
+    }
+
+    public static String name(String name) {
+        return MOD_NAME + "-" + name;
     }
 
 }

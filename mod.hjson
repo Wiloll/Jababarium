@@ -8,7 +8,7 @@ name: "jababarium"
 author: "Wilol"
 
 #the fully qualified main class of the mod
-main: "jababarium.MainJababarium"
+main: "jababarium.Jababarium"
 
 #the mod description as seen in the mod dialog
 description: "A Mindustry greatest mod ever made!"
