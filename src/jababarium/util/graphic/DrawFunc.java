@@ -1,5 +1,6 @@
 package jababarium.util.graphic;
 
+import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
@@ -7,6 +8,7 @@ import arc.graphics.g2d.Font;
 import arc.graphics.g2d.GlyphLayout;
 import arc.graphics.g2d.Lines;
 import arc.math.Angles;
+import arc.math.Interp;
 import arc.math.Mathf;
 import arc.scene.ui.layout.Scl;
 import arc.util.Tmp;
@@ -52,6 +54,7 @@ public class DrawFunc {
             vec2 = new Vec2();
     // vec3 = new Vec2(),
     // vec4 = new Vec2();
+    public static float NOR_DISTANCE = 600f;
 
     public static void posSquare(Color color, float stroke, float size, float x1, float y1, float x2, float y2) {
 
@@ -148,5 +151,66 @@ public class DrawFunc {
     public static void tri(float x, float y, float width, float length, float angle) {
         float wx = Angles.trnsx(angle + 90, width), wy = Angles.trnsy(angle + 90, width);
         Fill.tri(x + wx, y + wy, x - wx, y - wy, Angles.trnsx(angle, length) + x, Angles.trnsy(angle, length) + y);
+    }
+
+    public static void circlePercent(float x, float y, float rad, float percent, float angle) {
+        float p = Mathf.clamp(percent);
+
+        int sides = Lines.circleVertices(rad);
+
+        float space = 360.0F / (float) sides;
+        float len = 2 * rad * Mathf.sinDeg(space / 2);
+        float hstep = Lines.getStroke() / 2.0F / Mathf.cosDeg(space / 2.0F);
+        float r1 = rad - hstep;
+        float r2 = rad + hstep;
+
+        int i;
+
+        for (i = 0; i < sides * p - 1; ++i) {
+            float a = space * (float) i + angle;
+            float cos = Mathf.cosDeg(a);
+            float sin = Mathf.sinDeg(a);
+            float cos2 = Mathf.cosDeg(a + space);
+            float sin2 = Mathf.sinDeg(a + space);
+            Fill.quad(x + r1 * cos, y + r1 * sin, x + r1 * cos2, y + r1 * sin2, x + r2 * cos2, y + r2 * sin2, x + r2 * cos, y + r2 * sin);
+        }
+
+        float a = space * i + angle;
+        float cos = Mathf.cosDeg(a);
+        float sin = Mathf.sinDeg(a);
+        float cos2 = Mathf.cosDeg(a + space);
+        float sin2 = Mathf.sinDeg(a + space);
+        float f = sides * p - i;
+        vec1.trns(a, 0, len * (f - 1));
+        Fill.quad(x + r1 * cos, y + r1 * sin, x + r1 * cos2 + vec1.x, y + r1 * sin2 + vec1.y, x + r2 * cos2 + vec1.x, y + r2 * sin2 + vec1.y, x + r2 * cos, y + r2 * sin);
+    }
+
+    public static void circlePercentFlip(float x, float y, float rad, float in, float scl) {
+        boolean monoIncr = in % (scl * 4) < scl * 2;
+        float f = Mathf.cos(in % (scl * 3f), scl, 1.1f);
+        circlePercent(x, y, rad, f > 0 ? f : -f, in + -90 * Mathf.sign(f));
+    }
+
+    public static float cameraDstScl(float x, float y, float norDst) {
+        vec1.set(Core.camera.position);
+        float dst = Mathf.dst(x, y, vec1.x, vec1.y);
+        return 1 - Mathf.clamp(dst / norDst);
+    }
+    public static float rotator_90(float in /*(0, 1)*/, float margin) {
+        return 90 * JBInterp.pow10.apply(Mathf.curve(in, margin, 1 - margin));
+    }
+    public static float rotator_90() {
+        return 90 * Interp.pow5.apply(Mathf.curve(cycle_100(), 0.15f, 0.85f));
+    }
+    public static float cycle_100() {
+        return Time.time % 100 / 100;
+    }
+
+    public static float cycle(float phaseOffset, float T) {
+        return (Time.time + phaseOffset) % T / T;
+    }
+
+    public static float cycle(float in, float phaseOffset, float T) {
+        return (in + phaseOffset) % T / T;
     }
 }

@@ -126,6 +126,12 @@ public class JBFx {
                 Fill.circle(e.x, e.y, 2.5f * e.fout());
             }),
 
+            hugeSmokeGray = new Effect(40f, e -> {
+                Draw.color(Color.gray, Color.darkGray, e.fin());
+                Angles.randLenVectors(e.id, 6, 2.0F + 19.0F * e.finpow(), (x, y) -> Fill.circle(e.x + x / 2.0F, e.y + y / 2.0F, e.fout() * 2f));
+                e.scaled(25f, i -> Angles.randLenVectors(e.id, 6, 2.0F + 19.0F * i.finpow(), (x, y) -> Fill.circle(e.x + x, e.y + y, i.fout() * 4.0F)));
+            }),
+
             // chainLightningFadeReversed = new Effect(220f, 500f, e -> {
             // if (!(e.data instanceof Position))
             // return;
@@ -320,6 +326,18 @@ public class JBFx {
             color(fromColor, toColor, e.fin());
             Fill.poly(e.x, e.y, 6, size * e.fout(), e.rotation);
             Drawf.light(e.x, e.y, e.fout() * size, fromColor, 0.7f);
+        });
+    }
+
+    public static Effect squareRand(Color color, float sizeMin, float sizeMax) {
+        return new Effect(20f, sizeMax * 2f, e -> {
+            Draw.color(Color.white, color, e.fin() + 0.15f);
+            if (e.id % 2 == 0) {
+                Lines.stroke(1.5f * e.fout(Interp.pow3Out));
+                Lines.square(e.x, e.y, Mathf.randomSeed(e.id, sizeMin, sizeMax) * e.fin(Interp.pow2Out) + 3, 45);
+            } else {
+                Fill.square(e.x, e.y, Mathf.randomSeed(e.id, sizeMin * 0.5f, sizeMin * 0.8f) * e.fout(Interp.pow2Out), 45);
+            }
         });
     }
 }

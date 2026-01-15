@@ -17,7 +17,7 @@ import jababarium.Jababarium;
 
 public class JBContent extends Content {
 
-    public static TextureRegion arrowRegion;
+    public static TextureRegion arrowRegion, pointerRegion;
 
     public static TextureRegion // UI
     raid, objective, fleet, capture;
@@ -42,7 +42,8 @@ public class JBContent extends Content {
 
         // Спробуємо завантажити кастомну текстуру, якщо не знайдена - використовуємо
         // дефолтну
-        arrowRegion = Core.atlas.find("jababarium-frog");
+        arrowRegion = Core.atlas.find("jababarium-jump-gate-arrow");
+        pointerRegion = Core.atlas.find("jababarium-jump-gate-pointer");
     }
 
     Texture loadTex(String name, Cons<Texture> modifier) {

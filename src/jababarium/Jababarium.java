@@ -2,12 +2,11 @@ package jababarium;
 
 import arc.*;
 import arc.util.*;
-import jababarium.content.JBBlocks;
-import jababarium.content.JBSounds;
+import jababarium.content.*;
+import jababarium.expand.block.CraftingBlock;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
-import jababarium.content.JBContent;
 
 public class Jababarium extends Mod {
     public static final String MOD_NAME = "jababarium";
@@ -37,6 +36,9 @@ public class Jababarium extends Mod {
         JBBlocks.load();
         JBSounds.load();
         JBContent.loadPriority();
+        JBItems.load();
+        JBLiquids.load();
+        CraftingBlock.load();
         Log.info("Loading some example content.");
     }
 

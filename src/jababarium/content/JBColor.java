@@ -29,7 +29,10 @@ public class JBColor {
             xenEmpty = Color.valueOf("a3a9ad"),
             xenAlpha = Color.valueOf("abc8dc"),
             xenBeta = Color.valueOf("94caed"),
-            xenGamma = Color.valueOf("78c9ff");
+            xenGamma = Color.valueOf("78c9ff"),
+            nectrone = Color.valueOf("#4EC225"),
+            cryostal = Color.valueOf("#2AE4EB");
+
 
     static {
         Colors.put("heal", Pal.heal);

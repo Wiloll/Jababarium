@@ -120,7 +120,7 @@ public class JBBlocks {
 
                 reloadTime = 300f;
 
-                consumePowerCond(6f, BombLauncherBuild::isCharging);
+                consumePowerCond(26f, BombLauncherBuild::isCharging);
                 consumeItem(Items.surgeAlloy, 2);
                 itemCapacity = 16;
                 health = 1200;
