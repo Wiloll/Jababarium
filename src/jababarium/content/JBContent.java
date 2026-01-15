@@ -6,6 +6,7 @@ import arc.func.Func;
 import arc.func.Prov;
 import arc.graphics.Texture;
 import arc.graphics.g2d.TextureRegion;
+// import arc.util.Log;
 import mindustry.Vars;
 import mindustry.ctype.Content;
 import mindustry.ctype.ContentType;
@@ -39,7 +40,9 @@ public class JBContent extends Content {
         if (Vars.headless)
             return;
 
-        arrowRegion = Core.atlas.find(Jababarium.name("jump-gate-arrow"));
+        // Спробуємо завантажити кастомну текстуру, якщо не знайдена - використовуємо
+        // дефолтну
+        arrowRegion = Core.atlas.find("jababarium-frog");
     }
 
     Texture loadTex(String name, Cons<Texture> modifier) {

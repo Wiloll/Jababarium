@@ -6,6 +6,7 @@ import arc.graphics.g2d.Fill;
 import arc.graphics.g2d.Font;
 import arc.graphics.g2d.GlyphLayout;
 import arc.graphics.g2d.Lines;
+import arc.math.Angles;
 import arc.math.Mathf;
 import arc.scene.ui.layout.Scl;
 import arc.util.Tmp;
@@ -142,5 +143,10 @@ public class DrawFunc {
 
     public static void overlayText(String text, float x, float y, float offset, Color color, boolean underline) {
         overlayText(Fonts.outline, text, x, y, offset, 1, 0.25f, color, underline, false);
+    }
+
+    public static void tri(float x, float y, float width, float length, float angle) {
+        float wx = Angles.trnsx(angle + 90, width), wy = Angles.trnsy(angle + 90, width);
+        Fill.tri(x + wx, y + wy, x - wx, y - wy, Angles.trnsx(angle, length) + x, Angles.trnsy(angle, length) + y);
     }
 }

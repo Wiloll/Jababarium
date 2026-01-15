@@ -35,7 +35,7 @@ public class BombLauncher extends CommandableAttackerBlock {
     public TextureRegion bombRegion;
     public TextureRegion[] gunBarrelRegion = new TextureRegion[4];
 
-    public Sound shootSound = JBSounds.artilleryFire2;
+    public Sound shootSound;
     public Color baseColor = Pal.redderDust;
 
     public float bombVelPerTile = 2f;
@@ -43,7 +43,7 @@ public class BombLauncher extends CommandableAttackerBlock {
     public BombLauncher(String name) {
         super(name);
         storage = 4;
-        range = 800f;
+        range = 3000f;
         spread = 80f;
         prepareDelay = 30f;
     }
@@ -64,6 +64,7 @@ public class BombLauncher extends CommandableAttackerBlock {
     public void load() {
         super.load();
         bombRegion = Core.atlas.find(name + "-bomb", Core.atlas.find("launchpod"));
+        shootSound = JBSounds.artilleryFire2;
     }
 
     /*

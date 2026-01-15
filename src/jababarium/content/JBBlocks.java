@@ -1,39 +1,26 @@
 package jababarium.content;
 
-import arc.scene.ui.layout.Table;
-import arc.audio.Sound;
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Fill;
 import arc.math.Mathf;
-import mindustry.content.Bullets;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.StatusEffects;
-import mindustry.gen.Building;
-import mindustry.gen.Call;
-import mindustry.graphics.Drawf;
-import mindustry.graphics.Layer;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
-import java.util.Random;
 import mindustry.gen.Bullet;
 import jababarium.util.func.JBFunc;
-import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.bullet.BulletType;
 import mindustry.entities.bullet.FlakBulletType;
-import mindustry.entities.bullet.ShrapnelBulletType;
 import jababarium.expand.block.commandable.BombLauncher;
-import jababarium.util.graphic.DrawFunc;
+import jababarium.expand.bullets.LightningLinkerBulletType;
+import jababarium.util.graphic.OptionalMultiEffect;
 
 public class JBBlocks {
 
     public static Block manualArtillery;
-    private static final Random rand = new Random();
+    // private static final Random rand = new Random();
 
-    private static final float OPEN_SOUND_COOLDOWN = 60f;
-    private static final float FIRE_SOUND_COOLDOWN = 75f;
+    // private static final float OPEN_SOUND_COOLDOWN = 60f;
+    // private static final float FIRE_SOUND_COOLDOWN = 75f;
 
     public static void load() {
 
@@ -50,20 +37,20 @@ public class JBBlocks {
                                 Items.silicon, 150,
                                 Items.surgeAlloy, 100));
 
-                bullet = new BasicBulletType(6f, 40) {
+                bullet = new LightningLinkerBulletType(0f, 200) {
                     {
                         trailWidth = 4.5f;
                         trailLength = 66;
 
-                        // spreadEffect = slopeEffect = Fx.none;
-                        // trailEffect = JBFx.hitSparkHuge;
+                        spreadEffect = slopeEffect = Fx.none;
+                        trailEffect = JBFx.hitSparkHuge;
                         trailInterval = 5;
 
                         backColor = trailColor = hitColor = lightColor = lightningColor = JBColor.thurmixRed;
                         frontColor = JBColor.thurmixRed;
-                        // randomGenerateRange = 240f;
-                        // randomLightningNum = 1;
-                        // linkRange = 120f;
+                        randomGenerateRange = 240f;
+                        randomLightningNum = 1;
+                        linkRange = 120f;
                         range = 200f;
 
                         drawSize = 20f;
@@ -85,7 +72,7 @@ public class JBBlocks {
                                 trailRotation = true;
                                 trailInterval = 3;
 
-                                // trailEffect = JBFx.polyTrail(backColor, frontColor, 4.65f, 22f);
+                                trailEffect = JBFx.polyTrail(backColor, frontColor, 4.65f, 22f);
                                 trailChance = 0f;
                                 knockback = 12f;
                                 lifetime = 40f;
@@ -113,11 +100,10 @@ public class JBBlocks {
                         pierce = false;
                         collides = false;
                         lifetime = 10;
-                        // despawnEffect = new OptionalMultiEffect(
-                        // NHFx.crossBlast(hitColor, splashDamageRadius * 0.8f),
-                        // NHFx.blast(hitColor, splashDamageRadius * 0.8f),
-                        // NHFx.circleOut(hitColor, splashDamageRadius * 0.8f)
-                        // );
+                        despawnEffect = new OptionalMultiEffect(
+                                JBFx.crossBlast(hitColor, splashDamageRadius * 0.8f),
+                                JBFx.blast(hitColor, splashDamageRadius * 0.8f),
+                                JBFx.circleOut(hitColor, splashDamageRadius * 0.8f));
                     }
 
                     @Override
